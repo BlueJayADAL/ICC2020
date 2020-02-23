@@ -1,0 +1,136 @@
+\documentclass[conference]{IEEEtran}
+
+\usepackage{enumerate}
+\usepackage{enumitem}
+\setenumerate[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=2pt}
+\setitemize[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=2pt}
+\setdescription{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=2pt}
+
+\usepackage{longtable}
+\usepackage{rotating}
+\usepackage{multirow}
+%\usepackage[table]{xcolor}	%for color of table cell
+\usepackage{diagbox}		%for head of table
+
+%\usepackage[tight,footnotesize]{subfigure}
+
+\usepackage{listings}
+\usepackage{color}
+
+%\usepackage{caption}
+\usepackage[noend]{algpseudocode}
+\usepackage{algorithm}
+\algnewcommand{\LineComment}[1]{\State \(\triangleright\) #1}
+
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{multirow}
+%\usepackage[amsmath,thmmarks]{ntheorem}
+
+\usepackage{empheq}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\definecolor{hellmagenta}{rgb}{1,0.75,0.9}		%for color of equations
+\definecolor{hellcyan}{rgb}{0.75,1,0.9}
+\definecolor{hellgelb}{rgb}{1,1,0.8}
+\definecolor{colKeys}{rgb}{0,0,1}
+\definecolor{colIdentifier}{rgb}{0,0,0}
+\definecolor{colComments}{rgb}{1,0,0}
+\definecolor{colString}{rgb}{0,0.5,0}
+\definecolor{darkyellow}{rgb}{1,0.9,0}
+
+\usepackage{amssymb}
+\usepackage{stfloats}
+%\usepackage[square, comma, sort&compress, numbers]{natbib}
+\usepackage{mathrsfs}
+\usepackage{subfigure}
+
+\usepackage{lipsum}
+\usepackage{lmodern}
+\usepackage{tcolorbox}
+\usepackage[linewidth=1pt]{mdframed}
+
+%\usepackage[colorlinks,
+%            linkcolor=red,
+%            anchorcolor=blue,
+%            citecolor=green]{hyperref}
+
+%\usepackage[citecolor=black]{hyperref}
+\usepackage{url}
+\usepackage{array}
+\usepackage{fancyhdr}
+\usepackage{booktabs} % For formal tables
+\usepackage{textcomp}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+		T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+\begin{document}
+
+\title{ACETA: Accelerating Encrypted Traffic Analytics on Network Edge}
+%\titlenote{Produces the permission block, and copyright information}
+%\subtitle{Extended Abstract}
+
+\author{
+  \IEEEauthorblockN{Derek Manning\IEEEauthorrefmark{1}, Peilong Li\IEEEauthorrefmark{1}}
+  \IEEEauthorblockA{Department of Computer Science\\
+    \textit{Elizabethtown College} \\
+    \IEEEauthorrefmark{1}\{$ManningD1$, $LiP$\}@etown.edu
+  }
+  \and
+    \IEEEauthorblockN{Xiaoban Wu\IEEEauthorrefmark{2},  Yan Luo\IEEEauthorrefmark{3}}
+    \IEEEauthorblockA{Electrical and Computer Engineering\\
+  	\textit{University of Massachusetts Lowell} \\
+  	\IEEEauthorrefmark{2}$Xiaoban\_Wu$@student.uml.edu, \\
+  	\IEEEauthorrefmark{3}$Yan\_Luo$@uml.edu 
+  }
+  \and
+  	\IEEEauthorblockN{Tong Zhang\IEEEauthorrefmark{4},  Weigang Li\IEEEauthorrefmark{4}}
+  	\IEEEauthorblockA{
+  		\textit{Intel Corporation} \\
+  		\IEEEauthorrefmark{4}\{$Tong2.Zhang$, $Weigang.Li$\}@intel.com
+  }
+}
+
+
+
+\maketitle
+
+\input{abstract}
+
+\begin{IEEEkeywords}
+Encrypted Traffic Analysis; DAAL; OpenVINO; Edge Computing; uCPE;
+\end{IEEEkeywords}
+
+\input{intro}
+\input{related}
+\input{design}
+\input{evaluation}
+\input{conclusion}
+\input{ack}
+
+\bibliographystyle{IEEEtran.bst}
+\bibliography{ref} 
+
+%\appendix
+%
+%\subsection{Use Case Demonstration}
+%\label{UseCaseAppendix}
+
+%\begin{table}[ht]
+%\centering
+%\caption{Examples of use cases (based on the topology of Fig. \ref{fig:ex_event} ).}
+%\label{table:ex_query}
+%\begin{tabular}{|l|p{3.4 in}|l|l|}
+%\hline
+%\textbf{Example} & \textbf{Query code} & \textbf{Composition} & \textbf{Description} \\ \hline
+%\begin{tabular}[c]{@{}l@{}}Flow volume \\ over a link\end{tabular} & \begin{tabular}[c]{@{}l@{}}q1: Select ipv4\_src, ipv4\_dst, AVG(pkt\_len) \\\hspace*{3mm} Where sw\_id=sw1 \& in\_pt=1 \\ Groupby ipv4\_src, ipv4\_dst\end{tabular} & N & \begin{tabular}[c]{@{}l@{}}Query per-flow average \\ volume over a specified link.\end{tabular} \\ \hline
+%\begin{tabular}[c]{@{}l@{}}Heavy hitter \\ detection\end{tabular} & \begin{tabular}[c]{@{}l@{}}q2: Select src\_ip, dst\_ip Where hh\_counter \textgreater1G \\ \hspace*{3mm} Groupby src\_ip, dst\_ip\\ create aggregate hh\_counter (agg\_hh):\\ \hspace*{3mm} agg\_hh{[}src\_ip{]}{[}dst\_ip{]} += pkt.pkt\_len\end{tabular} & N & \begin{tabular}[c]{@{}l@{}}Source-destination IP address\\  pairs whose traffic volume is\\  more than a pre-specified\\  threshold.\end{tabular} \\ \hline
+%\begin{tabular}[c]{@{}l@{}}Flow volume \&\\  link throughput, \\ sequentially\end{tabular} & \begin{tabular}[c]{@{}l@{}}q3: Select src\_ip, dst\_ip, SUM(pkt\_len) \\ \hspace*{3mm} Where src\_ip=10.0.0.1, dst\_ip=10.0.0.10 \\ Groupby ipv4\_src, ipv4\_dst\\ q4: Select SUM(pkt\_len) Where sw\_id=sw1 \& in\_pt=1 \\ \hspace*{3mm} When q3:true\end{tabular} & q3 $\gg$ q4 & \begin{tabular}[c]{@{}l@{}}Execute two queries\\ sequentially.\end{tabular} \\ \hline
+%\begin{tabular}[c]{@{}l@{}}Packet loss \\ detection\end{tabular} & \begin{tabular}[c]{@{}l@{}}q5: Select src\_ip, dst\_ip, pkt\_loss Groupby src\_ip, dst\_ip\\ q6: Select src\_ip, dst\_ip, window\_size Groupby src\_ip, dst\_ip \\ When q5:pkt\_loss\textgreater1000\\ q7: Select src\_ip, dst\_ip, SUM(pkt\_len) Groupby src\_ip, dst\_ip \\ When q5:pkt\_loss\textgreater1000\\ create aggregate pkt\_loss (agg\_pl, agg\_seq) \\ \hspace*{3mm} if pkt.seq $<$ agg\_seq then\\ \hspace*{3mm} agg\_pl++ else \\ \hspace*{3mm} agg\_seq = pkt.seq + pkt.payload\_len \end{tabular} & \begin{tabular}[c]{@{}l@{}}q5 $\gg$ \\ (q6\&q7)|e\end{tabular} & \begin{tabular}[c]{@{}l@{}}When the packet loss of TCP\\  flows exceed a threshold, TCP\\ window size and volume\\  of the flow will be measured.\end{tabular} \\ \hline
+%\begin{tabular}[c]{@{}l@{}}Loss localization \\ along a path\end{tabular} & \begin{tabular}[c]{@{}l@{}}q8: Select src\_ip, dst\_ip, pkt\_loss Where ipv4\_src=10.0.0.1 \\ \hspace*{3mm}\& ipv4\_dst=10.0.0.10 \\ Groupby src\_ip, dst\_ip\\ q9: Select src\_ip, dst\_ip, SUM(pkt\_len) Where sw\_id=sw1 \\ \hspace*{3mm} \& in\_pt=1 \\ Groupby src\_ip, dst\_ip When q8: pkt\_loss\textgreater1000\\ q10: Select src\_ip, dst\_ip, SUM(pkt\_len) Where sw\_id=sw2 \\ \hspace*{3mm}\& in\_pt=1 \\ Groupby src\_ip, dst\_ip When q8: pkt\_loss\textgreater1000\end{tabular} & \begin{tabular}[c]{@{}l@{}}q8 $\gg$ \\ (q9\&q10)|e\end{tabular} & \begin{tabular}[c]{@{}l@{}}Measure throughput in \\ different locations along \\ a path when the packet \\ loss of a TCP flow exceeds \\ a threshold.\end{tabular} \\ \hline
+%DDoS detection & \begin{tabular}[c]{@{}l@{}}q11: Select dst\_ip, COUNT(SYN) Groupby dst\_ip\\ q12: Select dst\_ip, diff\_syn\_ack Groupby dst\_ip \\ \hspace*{3mm} When q11:COUNT(SYN)\textgreater 1000\\ create aggregate diff\_syn\_ack (agg\_diff,agg\_syn,agg\_ack):\\ \hspace*{3mm}if pkt.SYN=1 \& pkt.ACK=0 then agg\_syn++\\ \hspace*{3mm}if pkt.SYN=1 \& pkt.ACK=1 then agg\_ack++\\ \hspace*{3mm}agg\_diff = agg\_syn - agg\_ack\end{tabular} & \begin{tabular}[c]{@{}l@{}} q11 $\gg$ \\ q12|e \end{tabular} & \begin{tabular}[c]{@{}l@{}}Measure the asymmetry\\  between incoming TCP packets \\ with SYN flags and outgoing\\  TCP packets with SYN and\\  ACK flags.\end{tabular} \\ \hline
+%\end{tabular}
+%\end{table}
+
+\end{document}
