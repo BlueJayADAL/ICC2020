@@ -1,5 +1,5 @@
 PROJECT= aceta
-TEX=pdflatex
+TEX=latex
 BIBTEX=bibtex
 BUILDTEX=$(TEX) $(PROJECT).tex
 
@@ -8,7 +8,7 @@ all:
 		$(BIBTEX) $(PROJECT)
 		$(BUILDTEX)
 		$(BUILDTEX)
-		#dvipdf $(PROJECT).dvi
+		dvipdf $(PROJECT).dvi
 		#open -a preview $(PROJECT).pdf
 
 clean-all:
